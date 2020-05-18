@@ -12,6 +12,9 @@ class ZoopServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        include __DIR__ . '/../Http/routes.php';
+
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadJSONTranslationsFrom(__DIR__ . '/../Resources/lang');
@@ -27,6 +30,8 @@ class ZoopServiceProvider extends ServiceProvider
         );
 
         Customer::observe(VendorObserver::class);
+
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**

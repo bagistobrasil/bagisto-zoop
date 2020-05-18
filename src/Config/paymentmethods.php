@@ -12,6 +12,6 @@ return [
         'class'         => \LevanteLab\Zoop\Payment\Zoop::class,
         'active'        => true,
         'sort'          => 100,
-        'description'   => __('COLOCAR')
+        'description'   => __('Pague em 12x sem juros')
     ],
 ];

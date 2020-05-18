@@ -7,8 +7,12 @@ use Illuminate\Support\Carbon;
 use RuntimeException;
 use Webkul\Payment\Payment\Payment;
 use Illuminate\Support\Facades\Log;
-use LevanteLab\Zoop\Models\ZoopPayments;
-use LevanteLab\Zoop\Models\ZoopVendor;
+use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartAddress;
+use LevanteLab\Zoop\Repositories\ZoopRepository;
+use LevanteLab\Zoop\Repositories\ZoopVendorRepository;
+use LevanteLab\Zoop\Helper\Helper;
+
 use function core;
 
 /**
@@ -63,15 +67,39 @@ class Zoop extends Payment
     protected $currentVendor;
 
     /**
+     *
+     */
+    protected $zoopRepository;
+
+    /**
+     *
+     */
+    protected $zoopVendorRepository;
+
+    /**
+     * @var Helper
+     */
+    protected $helper;
+
+
+    /**
      * @throws Exception
      */
 
 
-    public function __construct()
+    public function __construct(
+        ZoopRepository $zoopRepository,
+        ZoopVendorRepository $zoopVendorRepository,
+        Helper $helper)
     {
+        $this->zoopRepository = $zoopRepository;
+        $this->zoopVendorRepository = $zoopVendorRepository;
+        $this->helper = $helper;
+
         $this->zpk = core()->getConfigData(self::CONFIG_ACCESS_ZPK);
         $this->currentVendor = auth()->guard('customer')->user();
         $this->marketplace_id = core()->getConfigData(self::CONFIG_MARKETPLACE_ID);
+        $this->currentUser = auth()->guard('customer')->user();
 
         if (core()->getConfigData(self::CONFIG_SANDBOX)) {
             $this->sandbox = true;
@@ -84,7 +112,7 @@ class Zoop extends Payment
     /**
      * @throws Exception
      */
-    public function init(): void
+    public function paymentRequest($data)
     {
         if (!$this->zpk) {
             throw new RuntimeException('Zoop: To use this payment method you need to inform the ZPK of Zoop account.');
@@ -94,14 +122,11 @@ class Zoop extends Payment
             throw new RuntimeException('Zoop: To use this payment method you need to inform the Marketplace ID of Zoop account.');
         }
 
-        $cart = $this->getCart();
+        if (!$this->getCart()) {
+            throw new Exception('Wirecard: Adicione produtos ao carrinho para realizar o pagamento!');
+        }
+
         //terminar aqui
-    }
-
-
-    public function send()
-    {
-
     }
 
 
@@ -144,12 +169,8 @@ class Zoop extends Payment
 
             if ($res->getStatusCode() == 201) {
                 $res = json_decode($res->getBody(), true);
+                $this->zoopVendorRepository->createVendor($res);
 
-                ZoopVendor::create([
-                    'marketplace_id' => $res['marketplace_id'],
-                    'uID'            => $res['id'],
-                    'terminal_code'  => $res['terminal_code']
-                ]);
             } else {
                 throw new RuntimeException('ERROR');
             }
@@ -176,6 +197,6 @@ class Zoop extends Payment
      */
     public function getRedirectUrl()
     {
-        $this->init();
+        return route('zoop.index');
     }
 }

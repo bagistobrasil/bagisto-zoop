@@ -16,8 +16,10 @@ class CreateZoopPaymentsTable extends Migration
         Schema::create('zoop_payments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('cart_id')->unique();
-            $table->json('zoop_payment_data')->nullable();
-            $table->json('zoop_order_data')->nullable();
+            $table->string('order_id');
+            $table->string('status')->nullable();
+            $table->string('reference')->nullable();
+            $table->string('event')->nullable();
             $table->timestamps();
         });
     }

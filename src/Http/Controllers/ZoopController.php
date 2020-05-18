@@ -14,6 +14,8 @@ use Illuminate\View\View;
 use InvalidArgumentException;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Sales\Repositories\OrderRepository;
+use LevanteLab\Zoop\Repositories\ZoopRepository;
+use LevanteLab\Zoop\Repositories\ZoopVendorRepository;
 
 /**
  * Class ZoopController
@@ -28,19 +30,60 @@ class ZoopController extends Controller
      */
     protected $orderRepository;
 
+    /**
+     * ZoopRepository object
+     *
+     * @var ZoopRepository
+     */
+    protected $zoopRepository;
+
+
+    /**
+     * ZoopVendorRepository object
+     *
+     * @var ZoopVendorRepository
+     */
+
+    protected $zoopVendorRepository;
+
+
 
     /**
      * Create a new controller instance.
      *
      * @param OrderRepository $orderRepository
-     * @param Helper $helper
+     * @param ZoopRepository $zoopRepository
+     * @param ZoopVendorRepository $zoopVendorRepository
      */
+
     public function __construct(
-        OrderRepository $orderRepository
+        OrderRepository $orderRepository,
+        ZoopRepository  $zoopRepository,
+        ZoopVendorRepository $zoopVendorRepository
     )
     {
         $this->orderRepository = $orderRepository;
+        $this->zoopRepository = $zoopRepository;
+        $this->zoopVendorRepository = $zoopVendorRepository;
+
+        $this->currentUser = auth()->guard('customer')->user();
     }
+
+
+    public function index()
+    {
+        return view('zoop::index', ['user' => $this->currentUser, 'billingAddress' => '']);
+    }
+
+
+    /**
+     *
+     */
+    public function pay(Request $request)
+    {
+        // terminar aqui;
+    }
+
 
     /**
      *
