@@ -1,0 +1,28 @@
+{
+    "authors": [
+        {
+            "name": "Felippe Simoes",
+            "email": "felipesteixeira@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LevanteLab\\Zoop\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LevanteLab\\Zoop\\Providers\\ZoopServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "name": "LevanteLab/zoop",
+    "require": {
+        "cagartner/bagisto-brazilcustomer": "dev-master",
+        "ixudra/curl": "6.*"
+    }
+}
