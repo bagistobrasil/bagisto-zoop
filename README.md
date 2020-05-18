@@ -24,7 +24,7 @@ Configurações disponíveis:
 * **Marketplace ID**: Identificação da sua Conta na Zoop.
 * **ZPK**: Chave única para transações.
 
-![Image](https://raw.githubusercontent.com/bagistobrasil/bagisto-zoop/master/screenshots/config.PNG)
+![Image](screenshots/config.PNG)
 
 ## Me pague uma cerveja:
 
