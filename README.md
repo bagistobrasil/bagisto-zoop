@@ -24,7 +24,7 @@ Configurações disponíveis:
 * **Marketplace ID**: Identificação da sua Conta na Zoop.
 * **ZPK**: Chave única para transações.
 
-![Image](screenshots/config.PNG)
+![](screenshots/config.png)
 
 ## Me pague uma cerveja:
 
