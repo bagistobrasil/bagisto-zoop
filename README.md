@@ -3,7 +3,7 @@
 
 Módulo criado para adicionar a opção de meio de pagamento Zoop na ferramenta de e-Commerce Bagisto
 
-#Warning
+# Warning
 
 Módulo em desenvolvimento
 
@@ -48,7 +48,7 @@ Configurações disponíveis: -->
 * **Sandbox**: Permite testar sua loja em modo de testes, quando você tiver pronto para começar a vender de verdade essa opção precisa ser deselecionada.
 * **Status**: Ativa ou desativa o método de pagamento
 <!-- * **Quantidade de Parcelas sem Juros**: Quantidade de parcelas que seu cliente poderá comprar sem ter que pagar juros (Você assumirá essas taxas).
-* **Quantidade Máxima de Parcelas**: Quantidade máxima de parcelas que seus clientes poderão parcelar --> -->
+* **Quantidade Máxima de Parcelas**: Quantidade máxima de parcelas que seus clientes poderão parcelar -->
 
 <!-- ## Me pague uma cerveja:
 
