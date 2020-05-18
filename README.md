@@ -1,7 +1,7 @@
 
-# Laravel eCommerce Zoop Payment
+# Laravel eCommerce Zoop Payment ( Em desenvolvimento)
 
-Módulo criado para adicionar a opção de meio de pagamento Zoop na ferramenta de e-Commerce Bagisto ( Em desenvolvimento)
+Módulo criado para adicionar a opção de meio de pagamento Zoop na ferramenta de e-Commerce Bagisto 
 
 <!-- 
 Para maiores informações acesse a página da extenção oficial [clicando aqui](https://bagisto.com/en/extensions/laravel-ecommerce-pagseguro-payment-gateway/) -->
