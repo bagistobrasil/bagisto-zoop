@@ -126,7 +126,12 @@ class Zoop extends Payment
             throw new Exception('Wirecard: Adicione produtos ao carrinho para realizar o pagamento!');
         }
 
-        //terminar aqui
+        $cart = $this->getCart();
+        //$billingAddress = $cart->getBillingAddressAttribute();
+
+        //$shippingAddress = $cart->getShippingAddressAttribute();
+
+        dd($cart);
     }
 
 

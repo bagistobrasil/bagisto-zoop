@@ -2,7 +2,7 @@
 
 namespace LevanteLab\Zoop\Http\Controllers;
 
-use Fineweb\Wirecard\Helper\Helper;
+
 use LevanteLab\Zoop\Payment\Zoop;
 use Exception;
 use Illuminate\Contracts\View\Factory;
@@ -43,10 +43,15 @@ class ZoopController extends Controller
      *
      * @var ZoopVendorRepository
      */
-
     protected $zoopVendorRepository;
 
 
+    /**
+     * Zoop object
+     *
+     * @var Zoop
+     */
+    protected $zoop;
 
     /**
      * Create a new controller instance.
@@ -59,12 +64,14 @@ class ZoopController extends Controller
     public function __construct(
         OrderRepository $orderRepository,
         ZoopRepository  $zoopRepository,
-        ZoopVendorRepository $zoopVendorRepository
+        ZoopVendorRepository $zoopVendorRepository,
+        Zoop $zoop
     )
     {
         $this->orderRepository = $orderRepository;
         $this->zoopRepository = $zoopRepository;
         $this->zoopVendorRepository = $zoopVendorRepository;
+        $this->zoop = $zoop;
 
         $this->currentUser = auth()->guard('customer')->user();
     }
@@ -81,7 +88,17 @@ class ZoopController extends Controller
      */
     public function pay(Request $request)
     {
-        // terminar aqui;
+
+        try {
+            $payment = $this->zoop->paymentRequest($request->all());
+            return redirect()->route('zoop.success', ['reference' => $payment]);
+
+        } catch (\Exception $e) {
+            session()->flash('error', 'Ocorreu um problema ao efetuar o pagamento, tente novamente mais tarde.');
+            return redirect()->route('shop.checkout.cart.index');
+        }
+
+
     }
 
 

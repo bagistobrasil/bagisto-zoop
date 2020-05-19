@@ -23,5 +23,7 @@
     "Holder address state code": "UF",
     "Holder address zip": "CEP",
     "Holder address complemento": "Complemento",
-    "Zoop payment status": "Situação pagamento"
+    "Zoop payment status": "Situação pagamento",
+    "Finish Payment" : "Finalizar Pagamento",
+    "Credit Card Information": "Informações do Cartão de Crédito"
 }
